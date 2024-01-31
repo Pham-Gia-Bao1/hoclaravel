@@ -1,6 +1,8 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use Illuminate\Http\Request;
+
 use App\Models\User;
 
 /*
@@ -22,3 +24,22 @@ Route::get('/home', function () {
     return view('home');
 });
 
+// Route::get('/about', function () {
+//     return view('/contact/test1');
+// });
+// Route::get('/about/test2', function () {
+//     return view('/contact/test2');
+// });
+
+// Route::match(['get','post'],'home',function (){
+//     return $_SERVER['REQUEST_METHOD'];
+// });
+
+// Route::any('home',function(Request $request){
+//     echo $request->method();
+// });
+Route::prefix('contact')->group(function () {
+    Route::get('/test1', function () {
+        return view('/contact/test1');
+    });
+});
