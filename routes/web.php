@@ -1,6 +1,8 @@
 <?php
 
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\CategoryController;
+
 use Illuminate\Support\Facades\Route;
 use Illuminate\Http\Request;
 
@@ -21,44 +23,30 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/home',[HomeController::class,'index']);
+Route::get('/home', [HomeController::class, 'index']);
 
-Route::get('/about', function () {
-    return view('/contact/test1');
+Route::get('/contact', [CategoryController::class, 'index'])->name('home');
+Route::get('/home', function () {
+    $id = request('id');
+    $controller = new CategoryController();
+    $result = $controller->getOneCategory($id);
 });
-Route::get('/about/test2', function () {
-    return view('/contact/test2');
-});
 
-Route::get('name/{name}', [HomeController::class,'get_name']);
+Route::prefix('categories')->group(function () {
 
-// Route::get('home?name={id}',function($id){
-//     return $id;
-// });
-// Route::match(['get','post'],'home',function (){
-//     return $_SERVER['REQUEST_METHOD'];
-// });
 
-// Route::any('home',function(Request $request){
-//     echo $request->method();
-// });
-Route::prefix('contact')->group(function () {
-    Route::get('/test1/{id?}', function ($id = null) {
-        return "ID LA ". $id;
-    })->where(
-        [
-            'id' => '[0-9]+' // chỉ cho phép số nguyên tăng dần;
-        ]
-    )->name("contact.test1");
-    Route::get('test2', function(){
-        return view('contact/test2');
+
+    Route::get('view', function () {
+        return  view('/categories/viewOnew');
+        // $id = request('id');
+        // if (isset($id)) {
+        //     $controller = new CategoryController();
+        //     $result = $controller->getOneCategory($id);
+        //     return $result;
+        // }else{
+        //     return redirect()->route("home");
+        // }
     });
-});
 
-Route::prefix('admin')->group(function(){
-    Route::get("/login",function(){
-         return view('contact/test2');
-    })->name(
-        'login-aaddmin'
-    );
+    Route::get('add', [CategoryController::class, 'add']);
 });

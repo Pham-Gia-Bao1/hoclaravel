@@ -10,12 +10,12 @@ class HomeController extends Controller
         return view('/home');
     }
 
-    public function get_name($name){
-        if(isset($_GET['name'])){
-            echo $_GET['name'];
-        }else{
-            echo $name;
-        }
+    public function get_name(){
+       echo 'hello';
+    }
+
+    public function get_id(){
+        echo "123456789";
     }
 }
 
