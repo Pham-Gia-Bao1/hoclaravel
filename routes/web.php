@@ -2,6 +2,14 @@
 
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\Admin\DashboadCotroller;
+use App\Http\Controllers\Admin\AdminCommentController;
+
+use App\Http\Controllers\Client\HomeClientController;
+use App\Http\Controllers\Expert\HomeExpertController;
+
+
+
 
 use Illuminate\Support\Facades\Route;
 use Illuminate\Http\Request;
@@ -21,32 +29,23 @@ use App\Models\User;
 
 Route::get('/', function () {
     return view('welcome');
+})->name('home');
+
+Route::middleware('auth.role.admin')->prefix('/admin')->group(function(){
+    // Route::get('/dashboard','App\Http\Controllers\Admin\DashboadCotroller@index') -> name ('dashboard');
+    Route::get('/',[DashboadCotroller::class, 'index']);
+
+    Route::get('/home',[DashboadCotroller::class, 'index']);
+    Route::get('/comment', [AdminCommentController::class, 'index']);
+
 });
+Route::get('/client', [HomeClientController::class, 'index']);
+Route::post('/client', [HomeClientController::class, 'index']);
 
-Route::get('/home', [HomeController::class, 'index']);
-
-Route::get('/contact', [CategoryController::class, 'index'])->name('home');
-Route::get('/home', function () {
-    $id = request('id');
-    $controller = new CategoryController();
-    $result = $controller->getOneCategory($id);
-});
-
-Route::prefix('categories')->group(function () {
+Route::get('/client', [HomeClientController::class, 'get_name']);
+Route::post('/client', [HomeClientController::class, 'get_name']);
 
 
+Route::get('/expert', [HomeExpertController::class, 'index']);
 
-    Route::get('view', function () {
-        return  view('/categories/viewOnew');
-        // $id = request('id');
-        // if (isset($id)) {
-        //     $controller = new CategoryController();
-        //     $result = $controller->getOneCategory($id);
-        //     return $result;
-        // }else{
-        //     return redirect()->route("home");
-        // }
-    });
 
-    Route::get('add', [CategoryController::class, 'add']);
-});
