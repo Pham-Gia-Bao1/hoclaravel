@@ -1,11 +1,21 @@
-<h1>view client</h1>
-<form action="client" method = 'post'>
-    <input type="text" name="name" id="">
-    <input type="hidden" name="_token" id="" value="<?php  echo csrf_token() ?>"/>
-    <button type="submit">Submit</button>
-</form>
-{{$name}}
-{{$url}}
-{{}}
+<!DOCTYPE html>
+<html lang="en">
 
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
 
+<body>
+    <h1>Create New Post</h1>
+    url {{$url}} <br>method {{$method}} <br>{{$id}} <br> {{$name}} <br> {{$check}} <br> path : {{$path}}
+    <br>full url : {{$full_url}}
+    <br>{{$isMethodPost}}
+    <br> {{$name}}
+    <br> {{$ip}}
+    <br> {{$client_ip}}
+    <br> {{$age}}
+</body>
+
+</html>

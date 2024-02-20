@@ -8,14 +8,15 @@ use Illuminate\Http\Request;
 class DashboadCotroller extends Controller
 {
     //action method
-    public function index(){
+    public function index(Request $request){
         $name = 'Bao';
         $age = 19;
         $email = "bao.nguyen@gmail.com";
         $infor = [
             'Name' =>$name,
             'Age'=>$age,
-            'Email' => $email
+            'Email' => $email,
+            'reques' => $request
         ];
         return view('Admin/AdminView',$infor);
     }

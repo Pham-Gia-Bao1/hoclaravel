@@ -31,6 +31,7 @@ Route::get('/', function () {
     return view('welcome');
 })->name('home');
 
+//mddleware check login
 Route::middleware('auth.role.admin')->prefix('/admin')->group(function(){
     // Route::get('/dashboard','App\Http\Controllers\Admin\DashboadCotroller@index') -> name ('dashboard');
     Route::get('/',[DashboadCotroller::class, 'index']);
@@ -39,13 +40,5 @@ Route::middleware('auth.role.admin')->prefix('/admin')->group(function(){
     Route::get('/comment', [AdminCommentController::class, 'index']);
 
 });
-Route::get('/client', [HomeClientController::class, 'index']);
-Route::post('/client', [HomeClientController::class, 'index']);
 
-Route::get('/client', [HomeClientController::class, 'get_name']);
-Route::post('/client', [HomeClientController::class, 'get_name']);
-
-
-Route::get('/expert', [HomeExpertController::class, 'index']);
-
-
+Route::get('client', [HomeClientController::class, 'get_name']);
