@@ -58,13 +58,19 @@ class HomeClientController extends Controller
 
         // helper
         $age =request()->age;
-        return view('Client/ClientView', compact('url','age', 'ip','client_ip', 'method', 'id', 'name', 'check', 'path', 'full_url', 'name', 'only_name', 'except_values', 'isMethodPost'));
+
+        // assess in input value
+        $name1 = request()->name;
+        // check inpout value is exit
+        $check_query = request()->has('name');
+        echo $check_query;
+
+        return view('Client/ClientView', compact('url','age', 'ip','client_ip', 'method', 'id', 'name1', 'check', 'path', 'full_url', 'name', 'only_name', 'except_values', 'isMethodPost'));
     }
-    public function get_all_videos()
+    public function get_all_videos(Request $request)
     {
-        $video = new Item();
-        $videos = $video->get_all_video();
-        // dd($videos);
-        return view('Client/ClientView', compact('videos'));
+
+        $name = $request->get('name');
+        return view('Client/ClientView', compact('name'));
     }
 }

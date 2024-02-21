@@ -7,7 +7,7 @@ use App\Http\Controllers\Admin\AdminCommentController;
 
 use App\Http\Controllers\Client\HomeClientController;
 use App\Http\Controllers\Expert\HomeExpertController;
-
+use App\Http\Controllers\Expert;
 
 
 
@@ -42,3 +42,7 @@ Route::middleware('auth.role.admin')->prefix('/admin')->group(function(){
 });
 
 Route::get('client', [HomeClientController::class, 'get_name']);
+Route::post('client', [HomeClientController::class, 'get_all_videos']);
+
+Route::get('expert', [HomeExpertController::class, 'index']);
+Route::post('expert', [HomeExpertController::class, 'get_file']);
